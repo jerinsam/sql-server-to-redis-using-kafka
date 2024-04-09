@@ -112,8 +112,8 @@
 
 		[Service]
 		Type=simple
-		Environment="JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64/bin"
-		ExecStart=/home/jerin/learn/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/server.properties
+		Environment="JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/bin/"
+		ExecStart=/home/jerin/learn/kafka/bin/kafka-server-start.sh /home/jerin/learn/kafka/config/server.properties
 		ExecStop=/home/jerin/learn/kafka/bin/kafka-server-stop.sh
 
 		[Install]
