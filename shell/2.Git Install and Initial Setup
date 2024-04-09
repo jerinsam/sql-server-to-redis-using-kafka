@@ -1,0 +1,23 @@
+#Install Git
+	sudo apt install git
+	
+#Configure Git
+	echo "SQL Sever to Kafka to Redis" >> README.md
+	git init
+	git config --global user.email "jerinsam16@gmail.com"
+	git config --global user.name "Jerin"
+	git add README.md
+	git commit -m "first commit"
+	git branch -M main
+	git remote add origin https://github.com/jerinsam/DataSolutions.git
+	git push -u origin main
+		token : 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
+	
+	#Create new branch 
+	## Identify new changes in the Origin i.e. remote (github) repo
+	git fetch origin
+	## Update local repo with any change in remote repo
+	git pull origin main
+	## Checkout to create new dev branch 
+	git checkout -b dev
+
