@@ -1,0 +1,28 @@
+#Update all packages
+	sudo apt update
+
+#Install Python Pip
+	sudo apt install python3-pip
+
+#install pandas
+	sudo apt install python3-pandas
+
+#install redis - 
+	#snap and apt are package managers and snap is developed by Ubuntu creators. snap actually create a sand box 
+	#environment to install app but apt installs in the file system. 
+
+	sudo snap install curl
+	curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+
+	echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+
+	sudo apt-get update
+
+	#sudo apt install redis : apt and apt-get are same, new is apt install...
+	sudo apt-get install redis
+
+#Test Redis Installation - Server running
+	redis-cli ping
+	
+#install Python Redis Package
+	sudo apt install python3-redis
