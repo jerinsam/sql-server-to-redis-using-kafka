@@ -33,12 +33,99 @@
 #Configure Git
 	echo "SQL Sever to Kafka to Redis" >> README.md
 	git init
+	git config --global user.email "jerinsam16@gmail.com"
+	git config --global user.name "Jerin"
 	git add README.md
 	git commit -m "first commit"
 	git branch -M main
 	git remote add origin https://github.com/jerinsam/DataSolutions.git
 	git push -u origin main
-	git push -u origin main
+		token : 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
+	
+	#Create new branch 
+	## Identify new changes in the Origin i.e. remote (github) repo
+	git fetch origin
+	## Update local repo with any change in remote repo
+	git pull origin main
+	## Checkout to create new dev branch 
+	git checkout -b dev
+	
+#Install Kafka
+	#Install Java
+	sudo apt install default-jre default-jdk
+	java --version
+	
+	#Download kafka 
+	sudo wget https://downloads.apache.org/kafka/3.7.0/kafka_2.12-3.7.0.tgz
+	
+	#unzip
+	sudo tar -xzf kafka_2.12-3.7.0.tgz
+	
+	#move folder content to kafka folder 
+	mv -v ./kafka_2.12-3.7.0/* ./kafka
+	
+	#create kafka-logs and zookeeper folders
+	mkdir kafka-logs
+	mkdir zookeeper
+	
+	#update dataDir path in Zookeeper.Properties 
+	nano ./config/zookeeper.properties 
+	 #--dataDir=home/jerin/learn/kafka/zookeeper
+	 
+	#update dataDir path in Server.Properties 
+	nano ./config/server.properties 
+	 #--log.dirs=home/jerin/learn/kafka/kafka-logs
+	
+	#Create the systemd unit file for zookeeper service
+		#Step1
+		sudo nano /etc/systemd/system/zookeeper.service
+		
+		#Step 2 : Paste below code
+		[Unit]
+		Description=Apache Zookeeper service
+		Documentation=http://zookeeper.apache.org
+		Requires=network.target remote-fs.target
+		After=network.target remote-fs.target
 
-#Install SQL SERVER
+		[Service]
+		Type=simple
+		ExecStart=/home/jerin/learn/kafka/bin/zookeeper-server-start.sh /home/jerin/learn/kafka/config/zookeeper.properties
+		ExecStop=/home/jerin/learn/kafka/bin/zookeeper-server-stop.sh
+		Restart=on-abnormal
 
+		[Install]
+		WantedBy=multi-user.target
+		
+		#Step 3
+		sudo systemctl daemon-reload
+		
+		
+	#Create the systemd unit file for kafka service
+		#Step1
+		sudo nano /etc/systemd/system/kafka.service
+		
+		#Step 2 : Paste below code
+		[Unit]
+		Description=Apache Kafka Service
+		Documentation=http://kafka.apache.org/documentation.html
+		Requires=zookeeper.service
+
+		[Service]
+		Type=simple
+		Environment="JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64/bin"
+		ExecStart=/home/jerin/learn/kafka/bin/kafka-server-start.sh /usr/local/kafka/config/server.properties
+		ExecStop=/home/jerin/learn/kafka/bin/kafka-server-stop.sh
+
+		[Install]
+		WantedBy=multi-user.target
+		
+		#Step 3
+		sudo systemctl daemon-reload
+		
+	# Start Zookeeper & Kafka 
+		sudo systemctl start zookeeper
+		sudo systemctl start kafka
+
+	# Check Zookeeper & Kafka Status
+		sudo systemctl status zookeeper
+		sudo systemctl status kafka
