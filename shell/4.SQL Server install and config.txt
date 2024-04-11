@@ -72,3 +72,9 @@ ping 10.10.13.235
 #Test the connection : -C is used for trusted connection, if not passed then SSL error will come
 sqlcmd -S 10.10.13.235 -U js -P js -C
 
+#Test Query
+1> use adventureworks2019
+2> go
+Changed database context to 'AdventureWorks2019'.
+1> Select * from [HumanResources].[Department]
+2> go
