@@ -1,6 +1,6 @@
 import pyodbc
 
-SERVER = '10.10.13.235'
+SERVER = '10.10.14.100'
 DATABASE = 'TRYIT'
 USERNAME = 'js'
 PASSWORD = 'js'
