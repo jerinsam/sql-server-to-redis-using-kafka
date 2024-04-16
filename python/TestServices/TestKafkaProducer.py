@@ -1,4 +1,11 @@
 
+# # Start Kafka Server
+# sudo systemctl start zookeeper.service
+# sudo systemctl start kafka.service
+
+# sudo systemctl start zookeeper.service
+# sudo systemctl start kafka.service
+
 # # Create Kafka Topic
 # cd ~/learn/kafka/bin
 # ./kafka-topics.sh --create --bootstrap-server localhost:9092 --partitions 2 --topic mssql-to-redis
@@ -11,7 +18,6 @@
 
 # # Check all created topics
 # ./kafka-topics.sh --list --bootstrap-server localhost:9092
-
 
 import confluent_kafka as ck
 
