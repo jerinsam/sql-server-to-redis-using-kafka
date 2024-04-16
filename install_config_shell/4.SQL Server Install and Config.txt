@@ -69,7 +69,7 @@ openssl s_client -connect 10.10.13.235:1433 -tls1
 ping 10.10.13.235
 
 
-#Test the connection : -C is used for trusted connection, if not passed then SSL error will come
+#Test the connection : -C is used for trusted connection i.e. encrypt = true in the connection string, if not passed then SSL error will come
 sqlcmd -S 10.10.13.235 -U js -P js -C
 
 #Test Query
@@ -78,3 +78,11 @@ sqlcmd -S 10.10.13.235 -U js -P js -C
 Changed database context to 'AdventureWorks2019'.
 1> Select * from [HumanResources].[Department]
 2> go
+
+
+############## Install Python Packages ####################
+	
+#install Python odbc Package
+sudo apt install python3-pyodbc
+
+
