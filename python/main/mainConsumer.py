@@ -17,7 +17,7 @@ def redis_set(r,rKey,rValue):
     # # Delete all keys in the current database (FLUSHDB)
     # r.flushdb()
 
-def main():
+def mainConsumer():
 
     # Initiate Kafka Consumer
     topic_name = 'mssql-to-redis'
@@ -52,4 +52,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    mainConsumer()
