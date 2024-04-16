@@ -23,4 +23,3 @@ p = ck.Producer(conf)
 p.produce('mssql-to-redis', "Test Message from Python:JERIN")
 
 p.flush() #Wait  for message delivery
- 
