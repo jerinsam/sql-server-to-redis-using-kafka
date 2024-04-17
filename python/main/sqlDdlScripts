@@ -1,0 +1,50 @@
+ 
+ USE TRYIT;
+ 
+-------- To store Redis Keys and Values --------
+CREATE TABLE dbo.TestCache
+(
+	RedisKey VARCHAR(10), 
+	RedisValue  VARCHAR(max),
+	CreatedDate datetime2 DEFAULT GETDATE()
+);
+
+
+-------- To store Watermark Date - i.e. Date Time of data streamed till --------
+create table dbo.CacheProcessedDate
+(
+	ProcessedTillDate datetime2
+)
+INSERT INTO dbo.CacheProcessedDate VALUES ('1900-01-01')
+
+----Update dbo.CacheProcessedDate set ProcessedTillDate = CAST('1900-01-01 21:04:39.377000' as DATETIME2)
+
+--------------------- Insert Sample Redis Keys -----------------------------
+---- For Testing --- Batch Streaming: Set 1---
+INSERT INTO dbo.TestCache (RedisKey, RedisValue) VALUES
+('Jerin','{Sam}'),
+('Aayush','{Tom Cru}'),
+('Sachin','{Batman}')
+
+
+
+---- For Testing --- Batch Streaming: Set 2---
+INSERT INTO dbo.TestCache (RedisKey, RedisValue) VALUES
+('API1','{DSS}'),
+('API2','{TSS}'),
+('API3','{DataS}')
+
+
+---- For Testing --- Batch Streaming: Set 3---
+INSERT INTO dbo.TestCache (RedisKey, RedisValue) VALUES
+('API11','{A1-DSS}'),
+('API12','{A1-TSS}'),
+('API13','{A1-DataS}')
+
+
+--------------- Select and Explore -----------------
+--SELECT * FROM dbo.TestCache
+--WHERE CreatedDate > '2024-04-16 21:04:39.377'
+
+SELECT * FROM dbo.CacheProcessedDate  --2024-04-16 21:04:39.377
+ 

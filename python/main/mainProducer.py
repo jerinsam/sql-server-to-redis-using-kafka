@@ -39,8 +39,8 @@ def mainProducer (nextBatchDateTime):
     DATABASE = 'TRYIT'
     USERNAME = 'js'
     PASSWORD = 'js'
-    SQL_QUERY = "Select RedisKey, RedisValue, max(CreatedDate) over() MaxCreatedDate from TestCache where createdDate >= CAST('" + str(nextBatchDateTime) + "' as DATETIME2)"
-    
+    SQL_QUERY = "Select RedisKey, RedisValue, max(CreatedDate) over() MaxCreatedDate from TestCache where createdDate > DATEADD(MS, 1 ,CAST('" + str(nextBatchDateTime) + "' as DATETIME2))"
+
     # print(SQL_QUERY) #For Testing
 
     sqlOutput = sql_server_select (SERVER, DATABASE, USERNAME, PASSWORD, SQL_QUERY) 
@@ -65,7 +65,7 @@ def mainProducer (nextBatchDateTime):
         # print(json_data) ## Used for Testing
         # print(type(json_data))
         
-        # Produce message to Kafka topic
+        # Stream message to Kafka topic
         kProducer.produce(topic_name, value=json_data.encode('utf-8'))
 
         # Wait for message to be delivered
