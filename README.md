@@ -28,7 +28,8 @@ The solution is created on following are the list of Services:
 2. SQL Server
 3. Redis
 
-**Refer**: install_and_config Folder to get the details of the installation. 
+**Refer**: install_and_config Folder to get the details of the installation.
+
 **Refer**: /python/main folder to go through the python code used to push the json output to Redis. 
 
 2 Python scripts are created to implemet the solution:
