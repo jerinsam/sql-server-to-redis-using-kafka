@@ -20,7 +20,6 @@ Keeping all these issues in mind, Final Solution has following sections:
 
 This solution will not completely eliminate the Initial wait issue but will reduce a lot. 
 
-
 #### Implementation - 
 In this POC, We are looking into the Point 4, i.e. Streaming app to push the processed data to Redis.
 The solution is created on following are the list of Services:
@@ -32,17 +31,25 @@ The solution is created on following are the list of Services:
 
 **Refer**: /python/main folder to go through the python code used to push the json output to Redis. 
 
-2 Python scripts are created to implemet the solution:
+2 Python scripts are created to implement the solution:
 1. Kafka Producer
 2. Kafka Consumer
 
 Database Table DDLs and Testing queries are also present in the /python/main folder
 
 ##### Description:
-1. **Kafka Producer** : 
- 
+1. **Kafka Producer** : In this solution, data will be sent to producer in micro-batches.
+   - A table (dbo.CacheProcessedDate) is created to capture the max date (lets call this max date as batchStartDate) for the selected micro batch. (Initial date is 01-01-1900). This will be further utilized to get the next batch of data rows.
+   - All the rows from the main output table (where key, value and createdDateTime is stored) will be extracted where createdDateTime is greater than batchStartDate + 1 millisecond, this query will also return max of createdDateTime from the extracted rows. Idea is to transmit only new rows present in the table since processing of last micro batch.
+   - A dictionary is created to hold Key and Values and then serialize it to JSON, which will be further transmitted to Producer.
+   - Once data is transmitted, then max of createdDateTime from the transmitted batch will be stored in table (dbo.CacheProcessedDate).
+   - Now, Script will wait for 60 Seconds and then initiate the next iteration.
+   - In next iteration, date from the CacheProcessedDate table will be used to get the next batch of data rows to be transmitted.
+
 
 2. **Kafka Consumer** : In this script, following steps are taken - 
+   - Consumer will wait for 10 seconds to capture the messages from Producer.
    - JSON received from producer will be converted to dictionary.
    - key and value will be extracted from the dictionary.
    - Extracted key from above will be used to update Redis value associated to the key.
+   
