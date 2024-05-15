@@ -42,7 +42,7 @@ Database Table DDLs and Testing queries are also present in the /python/main fol
 1. **Kafka Producer** : 
  
 
-2. **Kafka Consumer** : In this script, following activities are performed - 
+2. **Kafka Consumer** : In this script, following steps are taken - 
 
   - JSON received from producer will be converted to dictionary.
   - key and value will be extracted from the dictionary.
