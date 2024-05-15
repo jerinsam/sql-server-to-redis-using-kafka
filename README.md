@@ -42,8 +42,7 @@ Database Table DDLs and Testing queries are also present in the /python/main fol
     1.1. 
     1.2. 
 
-2. Kafka Consumer : 
-    In this script, 
-    1.1. JSON received from producer will be converted to dictionary.
-    1.2. key and value will be extracted from the dictionary.
-    1.3. Extracted key from above will be used to update Redis value associated to the key.
+2. Kafka Consumer : In this script, following activities are performed -  
+2.1. JSON received from producer will be converted to dictionary.
+2.2. key and value will be extracted from the dictionary.
+2.3. Extracted key from above will be used to update Redis value associated to the key.
