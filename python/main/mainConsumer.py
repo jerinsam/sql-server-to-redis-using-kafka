@@ -39,7 +39,7 @@ def mainConsumer():
                 print(f'Error while consuming: {msg.error()}')
         else:
             #Parse the received message
-            value = json.loads(msg.value().decode('utf-8')) 
+            value = json.loads(msg.value().decode('utf-8')) #Convert to dictionary
             kvPair = [(k,v)  for k, v in value.items()]
             redisKey =  kvPair[0][0]
             redisValue =  kvPair[0][1]
