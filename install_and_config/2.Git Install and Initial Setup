@@ -4,14 +4,14 @@
 #Configure Git
 	echo "SQL Sever to Kafka to Redis" >> README.md
 	git init
-	git config --global user.email "jerinsam16@gmail.com"
-	git config --global user.name "Jerin"
+	git config --global user.email "XXXXXX@gmail.com"
+	git config --global user.name "XXXXX"
 	git add README.md
 	git commit -m "first commit"
 	git branch -M main
 	git remote add origin https://github.com/jerinsam/DataSolutions.git
 	git push -u origin main
-		token : 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
+		token : XXXX-XXXXXXXXXXXXXXXXX-XXXXXXXX
 	
 	#Create new branch 
 	## Identify new changes in the Origin i.e. remote (github) repo
